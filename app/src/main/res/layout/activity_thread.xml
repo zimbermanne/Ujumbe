@@ -58,13 +58,6 @@
                 android:textStyle="bold"
                 android:maxLines="1"
                 android:ellipsize="end" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="online"
-                android:textColor="@color/glass_text_secondary"
-                android:textSize="12sp" />
         </LinearLayout>
 
         <!-- Right Actions -->
@@ -92,9 +85,9 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="4dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="10dp"
+                android:padding="8dp"
                 android:scaleType="fitCenter"
-                android:src="@android:drawable/ic_menu_camera"
+                android:src="@drawable/ic_chat_bubble_white"
                 app:tint="@color/glass_text_primary" />
 
             <ImageButton
@@ -161,13 +154,6 @@
                 android:textColor="@color/glass_text_primary"
                 android:textColorHint="@color/glass_text_secondary"
                 android:textSize="15sp" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:src="@android:drawable/ic_btn_speak_now"
-                app:tint="@color/glass_text_secondary" />
 
         </LinearLayout>
 
