@@ -11,7 +11,11 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class BlockedContactsActivity : BaseActivity() {
 
@@ -25,6 +29,7 @@ class BlockedContactsActivity : BaseActivity() {
     private lateinit var textNoConversations: TextView
 
     private var allConversations = listOf<ConversationItem>()
+    private var filterJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,24 +87,35 @@ class BlockedContactsActivity : BaseActivity() {
     }
 
     private fun filter(query: String) {
-        val filteredList = if (query.isEmpty()) {
-            allConversations
-        } else {
-            allConversations.filter { item ->
-                val contactName = ContactsHelper.getContactName(this, item.address)
-                contactName.contains(query, ignoreCase = true) || item.address.contains(query, ignoreCase = true)
-            }
-        }
-        adapter.updateList(filteredList)
-        if (filteredList.isEmpty()) {
-            if (query.isEmpty()) {
-                textNoConversations.text = getString(R.string.settings_no_blocked)
+        filterJob?.cancel()
+        filterJob = lifecycleScope.launch {
+            if (query.isNotEmpty()) delay(150) // Debounce
+
+            val filteredList = if (query.isEmpty()) {
+                allConversations
             } else {
-                textNoConversations.text = getString(R.string.no_search_results)
+                withContext(Dispatchers.Default) {
+                    allConversations.filter { item ->
+                        val contactName =
+                            ContactsHelper.getContactName(this@BlockedContactsActivity, item.address)
+                        contactName.contains(query, ignoreCase = true) || item.address.contains(
+                            query,
+                            ignoreCase = true
+                        )
+                    }
+                }
             }
-            textNoConversations.visibility = View.VISIBLE
-        } else {
-            textNoConversations.visibility = View.GONE
+            adapter.updateList(filteredList)
+            if (filteredList.isEmpty()) {
+                if (query.isEmpty()) {
+                    textNoConversations.text = getString(R.string.settings_no_blocked)
+                } else {
+                    textNoConversations.text = getString(R.string.no_search_results)
+                }
+                textNoConversations.visibility = View.VISIBLE
+            } else {
+                textNoConversations.visibility = View.GONE
+            }
         }
     }
 }

@@ -3,10 +3,18 @@ package com.ujumbe.sms
 import android.content.Context
 import android.net.Uri
 import android.provider.ContactsContract
+import java.util.concurrent.ConcurrentHashMap
 
 object ContactsHelper {
-    fun getContactName(context: Context, phoneNumber: String): String {
-        var name = phoneNumber
+    private val contactCache = ConcurrentHashMap<String, String>()
+
+    fun getContactName(context: Context, phoneNumber: String?): String {
+        if (phoneNumber.isNullOrBlank()) return "Unknown"
+        
+        // Return from cache if available
+        contactCache[phoneNumber]?.let { return it }
+
+        var contactName: String = phoneNumber
         try {
             val uri = Uri.withAppendedPath(
                 ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
@@ -17,14 +25,22 @@ object ContactsHelper {
                 if (cursor.moveToFirst()) {
                     val nameIndex = cursor.getColumnIndex(ContactsContract.PhoneLookup.DISPLAY_NAME)
                     if (nameIndex != -1) {
-                        name = cursor.getString(nameIndex) ?: phoneNumber
+                        contactName = cursor.getString(nameIndex) ?: phoneNumber
                     }
                 }
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return name
+        
+        // Cache the result
+        contactCache[phoneNumber] = contactName
+        
+        return contactName
+    }
+
+    fun clearCache() {
+        contactCache.clear()
     }
 }
 

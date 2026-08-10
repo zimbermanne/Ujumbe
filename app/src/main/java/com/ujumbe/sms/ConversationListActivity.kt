@@ -19,7 +19,11 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ConversationListActivity : BaseActivity() {
 
@@ -34,6 +38,7 @@ class ConversationListActivity : BaseActivity() {
     private lateinit var editSearch: EditText
 
     private var allConversations = listOf<ConversationItem>()
+    private var searchJob: Job? = null
 
     private val newSmsReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -131,13 +136,20 @@ class ConversationListActivity : BaseActivity() {
     }
 
     private fun filterConversations(query: String) {
-        val filtered = allConversations.filter {
-            val contactName = ContactsHelper.getContactName(this, it.address)
-            contactName.contains(query, ignoreCase = true) ||
-                    it.address.contains(query, ignoreCase = true) ||
-                    it.snippet.contains(query, ignoreCase = true)
+        searchJob?.cancel()
+        searchJob = lifecycleScope.launch {
+            delay(150) // Debounce search input
+            
+            val filtered = withContext(Dispatchers.Default) {
+                allConversations.filter {
+                    val contactName = ContactsHelper.getContactName(this@ConversationListActivity, it.address)
+                    contactName.contains(query, ignoreCase = true) ||
+                            it.address.contains(query, ignoreCase = true) ||
+                            it.snippet.contains(query, ignoreCase = true)
+                }
+            }
+            updateUiList(filtered)
         }
-        updateUiList(filtered)
     }
 
     private fun updateUiList(list: List<ConversationItem>) {

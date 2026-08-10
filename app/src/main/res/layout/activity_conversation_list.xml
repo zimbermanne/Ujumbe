@@ -136,7 +136,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@android:drawable/ic_menu_camera"
+            android:src="@drawable/ic_chat_bubble_white"
             app:tint="@color/glass_text_primary" />
 
         <TextView
