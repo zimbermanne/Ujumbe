@@ -1,0 +1,6 @@
+{
+  "name": "Ujumbe",
+  "description": "Native Android SMS app to send and receive real SMS messages",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

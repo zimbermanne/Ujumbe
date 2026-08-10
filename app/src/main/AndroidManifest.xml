@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- SMS permissions -->
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+
+    <!-- new, required for default-SMS-app eligibility -->
+    <uses-permission android:name="android.permission.RECEIVE_MMS" />
+    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+
+    <!-- Biometric/Security permission -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+
+    <!-- Required for message popup overlay -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- Required on Android 13+ to show notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Required to download theme packs from a URL -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Ujumbe">
+
+        <!-- Splash / Welcome screen -->
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Ujumbe.NoToolbar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Main inbox list screen -->
+        <activity
+            android:name=".ConversationListActivity"
+            android:exported="false"
+            android:launchMode="singleTop" />
+
+        <!-- Chat thread screen -->
+        <activity
+            android:name=".ThreadActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data android:scheme="mms" />
+                <data android:scheme="mmsto" />
+            </intent-filter>
+        </activity>
+
+        <!-- Draft new message screen -->
+        <activity
+            android:name=".ComposeActivity"
+            android:exported="false" />
+
+        <!-- Preferences / Blocklist screen -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+
+        <!-- Spam & Blocked Contacts screen -->
+        <activity
+            android:name=".BlockedContactsActivity"
+            android:exported="false" />
+
+        <!-- Theme browser / installer screen -->
+        <activity
+            android:name=".ThemeSelectorActivity"
+            android:exported="false" />
+
+        <!-- Archived chats screen -->
+        <activity
+            android:name=".ArchiveListActivity"
+            android:exported="false" />
+
+        <!-- Required: quick-reply from other apps (e.g. car assistants) -->
+        <service
+            android:name=".RespondViaMessageService"
+            android:exported="true"
+            android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE">
+            <intent-filter>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data android:scheme="mms" />
+                <data android:scheme="mmsto" />
+            </intent-filter>
+        </service>
+
+        <!-- Replaces SMS_RECEIVED_ACTION — only default apps get this -->
+        <receiver
+            android:name=".SmsDeliverReceiver"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_DELIVER" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required: MMS receiving -->
+        <receiver
+            android:name=".MmsReceiver"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_WAP_PUSH">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />
+                <data android:mimeType="application/vnd.wap.mms-message" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Receives sent-status callbacks for outgoing SMS -->
+        <receiver
+            android:name=".SmsStatusReceiver"
+            android:exported="false" />
+
+        <!-- Service for displaying message popup overlay -->
+        <service
+            android:name=".MessagePopupService"
+            android:exported="false" />
+
+        <!-- Required: the provider needs to know your "default app" activities -->
+        <provider
+            android:name=".SmsProviderStub"
+            android:authorities="${applicationId}.dummy"
+            android:exported="false" />
+
+    </application>
+
+</manifest>

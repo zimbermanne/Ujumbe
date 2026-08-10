@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_back">Back</string>
+    <string name="action_call">Call</string>
+    <string name="action_more">More options</string>
+    <string name="action_new_message">New message</string>
+    <string name="action_pick_contact">Pick contact</string>
+    <string name="action_search">Search</string>
+    <string name="add_friend">New Message</string>
+    <string name="app_name">Ujumbe</string>
+    <string name="app_tagline">Proudly Tanzanian</string>
+    <string name="block_number">Block</string>
+    <string name="blocked_label">Blocked</string>
+    <string name="cancel">Cancel</string>
+    <string name="conversation_blocked_toast">%1$s is now blocked</string>
+    <string name="conversation_options_title">Conversation options</string>
+    <string name="theme_selector_title">Themes</string>
+    <string name="install_theme">Install a theme</string>
+    <string name="available_themes">AVAILABLE THEMES</string>
+    <string name="theme_active">Active theme</string>
+    <string name="manage_themes">Manage Themes</string>
+    <string name="manage_themes_subtitle">Browse, apply, or install new themes</string>
+    <string name="install_theme_from_file">From a file</string>
+    <string name="install_theme_from_url">From a URL</string>
+    <string name="theme_url_hint">https://example.com/theme.json</string>
+    <string name="download">Download</string>
+    <string name="downloading">Downloading…</string>
+    <string name="theme_installed">Installed \"%1$s\"</string>
+    <string name="theme_install_failed">Couldn\'t install theme</string>
+    <string name="theme_install_failed_generic">The theme file isn\'t valid or the server couldn\'t be reached.</string>
+    <string name="conversation_unblocked_toast">%1$s is now unblocked</string>
+    <string name="delete">Delete</string>
+    <string name="delete_conversation">Delete conversation</string>
+    <string name="delete_conversation_confirm">Delete this entire conversation? This cannot be undone.</string>
+    <string name="delete_message">Delete message</string>
+    <string name="delete_message_confirm">Delete this message?</string>
+    <string name="grant_permissions">Grant permissions</string>
+    <string name="hint_message">Type a message</string>
+    <string name="hint_phone_number">Phone number</string>
+    <string name="new_message">New Message</string>
+    <string name="no_conversations">No conversations yet. Tap + to start one.</string>
+    <string name="no_search_results">No matching conversations</string>
+    <string name="permissions_required">Ujumbe needs SMS and Contacts permissions to work. Please grant them in Settings.</string>
+    <string name="search_hint">Search conversations</string>
+    <string name="send">Send</string>
+    <string name="settings_all_contacts_section">Conversations</string>
+    <string name="settings_blocked_section">Blocked numbers</string>
+    <string name="settings_no_blocked">No blocked numbers yet. Toggle a switch below to block someone.</string>
+    <string name="settings_title">Settings</string>
+    <string name="tab_chats">Chats</string>
+    <string name="tab_settings">Settings</string>
+    <string name="tab_archived">Archived</string>
+    <string name="archive">Archive</string>
+    <string name="unarchive">Unarchive</string>
+    <string name="archive_success">Conversation archived</string>
+    <string name="unarchive_success">Conversation unarchived</string>
+    <string name="no_archived_conversations">No archived conversations</string>
+    <string name="unblock_number">Unblock</string>
+
+    <!-- Security settings strings -->
+    <string name="settings_security_section">Security</string>
+    <string name="settings_security_unlock">App Lock</string>
+    <string name="settings_security_unlock_desc">Require biometric, PIN, or password to unlock</string>
+    <string name="unlock_title">Unlock Ujumbe</string>
+    <string name="unlock_failed">Unlock failed. Please try again.</string>
+    <string name="unlock_hint">Protecting your conversations</string>
+</resources>

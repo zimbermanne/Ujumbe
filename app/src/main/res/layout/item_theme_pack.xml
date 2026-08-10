@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="12dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <View
+        android:id="@+id/viewSwatch"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_glass_pill" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textThemeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/glass_text_primary"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="Sunset Glow" />
+
+        <TextView
+            android:id="@+id/textThemeSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/glass_text_secondary"
+            android:textSize="12sp"
+            tools:text="Installed · by Reggie" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:textColor="@color/glass_text_secondary"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:text="$1.99"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/iconLock"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:src="@android:drawable/ic_lock_lock"
+        android:contentDescription="Premium Locked"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/iconDeletePack"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="12dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/delete"
+        android:padding="2dp"
+        android:src="@android:drawable/ic_menu_delete"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iconActiveCheck"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:contentDescription="@string/theme_active"
+        android:src="@android:drawable/checkbox_on_background"
+        android:visibility="invisible" />
+
+</LinearLayout>

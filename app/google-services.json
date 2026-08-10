@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "348229700752",
+    "project_id": "ujumbe-fedb1",
+    "storage_bucket": "ujumbe-fedb1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348229700752:android:145c2b2b03a8652bfd1c15",
+        "android_client_info": {
+          "package_name": "com.aistudio.ujumbesms.axbpxv"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsunEPE16pEJjdp5UkIg_Ra28yinhnXLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

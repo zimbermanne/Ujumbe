@@ -1,0 +1,21 @@
+{
+  "id": "sunset_glow",
+  "name": "Sunset Glow",
+  "author": "Ujumbe",
+  "colors": {
+    "light": {
+      "primary": "#FF6B35",
+      "primaryDark": "#C44D1F",
+      "accent": "#FFB088",
+      "background": "#FFF3ED",
+      "text": "#2B1206"
+    },
+    "dark": {
+      "primary": "#FF8358",
+      "primaryDark": "#1A0D06",
+      "accent": "#FFB088",
+      "background": "#1A0D06",
+      "text": "#FFE8DC"
+    }
+  }
+}

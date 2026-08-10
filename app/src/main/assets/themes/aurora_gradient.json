@@ -1,0 +1,33 @@
+{
+  "id": "aurora_gradient",
+  "name": "Aurora Gradient",
+  "author": "Zimbermanne",
+  "isPremium": true,
+  "price": "$1.99",
+  "animationType": "slide",
+  "layoutType": "floating",
+  "colors": {
+    "light": {
+      "primary": "#29B6D8",
+      "primaryGradientEnd": "#7C4DFF",
+      "primaryDark": "#1A2980",
+      "accent": "#00BFA5",
+      "background": "#F5F6FA",
+      "text": "#1B1B3A",
+      "backgroundAlpha": 0.85,
+      "surfaceAlpha": 0.9
+    },
+    "dark": {
+      "primary": "#26A6C4",
+      "primaryGradientEnd": "#6A3DE8",
+      "primaryDark": "#0D1030",
+      "accent": "#26D7B9",
+      "background": "#12121B",
+      "text": "#ECEFF7",
+      "backgroundAlpha": 0.9,
+      "surfaceAlpha": 0.8
+    }
+  },
+  "font": "sans-serif",
+  "bubbleStyle": "pill"
+}
