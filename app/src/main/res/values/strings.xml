@@ -57,6 +57,21 @@
     <string name="no_archived_conversations">No archived conversations</string>
     <string name="unblock_number">Unblock</string>
 
+    <!-- New Settings strings -->
+    <string name="settings_aesthetics">Asthertics</string>
+    <string name="settings_typography">App Typography</string>
+    <string name="settings_message_popup">Message Popup</string>
+    <string name="settings_archived_messages">Archived Messages</string>
+    <string name="settings_manage_blocked">Manage Blocked Numbers</string>
+    <string name="settings_about">About</string>
+    <string name="settings_version">Version 2.5</string>
+    <string name="settings_about_us">About us</string>
+    <string name="settings_website">https://moneytracer.up.railway.app</string>
+    <string name="settings_tagline">Ujumbe - Native SMS</string>
+    <string name="settings_studio">zimbermanne studios</string>
+    <string name="settings_proudly">proudly Tanzania.</string>
+    <string name="settings_coded_by">coded by Tanzanians for you.</string>
+
     <!-- Security settings strings -->
     <string name="settings_security_section">Security</string>
     <string name="settings_security_unlock">App Lock</string>

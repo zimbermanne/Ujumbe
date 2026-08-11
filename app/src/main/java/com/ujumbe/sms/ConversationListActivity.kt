@@ -14,7 +14,6 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,6 +35,7 @@ class ConversationListActivity : BaseActivity() {
     private lateinit var layoutEmpty: LinearLayout
     private lateinit var headerNormal: RelativeLayout
     private lateinit var editSearch: EditText
+    private lateinit var layoutSearchPill: View
 
     private var allConversations = listOf<ConversationItem>()
     private var searchJob: Job? = null
@@ -59,6 +59,7 @@ class ConversationListActivity : BaseActivity() {
         layoutEmpty = findViewById(R.id.layoutEmpty)
         headerNormal = findViewById(R.id.headerNormal)
         editSearch = findViewById(R.id.editSearch)
+        layoutSearchPill = findViewById(R.id.layoutSearchPill)
 
         recyclerConversations.layoutManager = LinearLayoutManager(this)
         adapter = ConversationAdapter(this, emptyList(), blockRepository,
@@ -77,7 +78,7 @@ class ConversationListActivity : BaseActivity() {
 
         // Set up Header Actions
         findViewById<ImageButton>(R.id.buttonSearch).setOnClickListener {
-            editSearch.requestFocus()
+            toggleSearch()
         }
         findViewById<View>(R.id.buttonAdd).setOnClickListener {
             startActivity(Intent(this, ComposeActivity::class.java))
@@ -161,9 +162,28 @@ class ConversationListActivity : BaseActivity() {
         }
     }
 
-    private fun showSearchHeader(show: Boolean) {
-        // Search is now always in a glassy pill below header or handled differently
-        // Keeping this for potential future toggle logic, but currently simplified
+    private fun toggleSearch() {
+        if (layoutSearchPill.visibility == View.GONE) {
+            layoutSearchPill.visibility = View.VISIBLE
+            layoutSearchPill.alpha = 0f
+            layoutSearchPill.translationY = -20f
+            layoutSearchPill.animate()
+                .alpha(1f)
+                .translationY(0f)
+                .setDuration(300)
+                .start()
+            editSearch.requestFocus()
+        } else {
+            layoutSearchPill.animate()
+                .alpha(0f)
+                .translationY(-20f)
+                .setDuration(200)
+                .withEndAction {
+                    layoutSearchPill.visibility = View.GONE
+                    editSearch.setText("")
+                }
+                .start()
+        }
     }
 
     private fun showOptionsDialog(item: ConversationItem) {

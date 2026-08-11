@@ -1,65 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="accent">#1E52C4</color>
+    <color name="primary">#6236FF</color>
+    <color name="primary_dark">#4A28D1</color>
+    <color name="primary_light">#EEECFF</color>
+    <color name="accent">#6236FF</color>
+
+    <color name="background">#F4F6FF</color>
+    <color name="list_background">#F4F6FF</color>
+    <color name="chat_background">#F4F6FF</color>
+
+    <color name="text_primary">#1A1A1A</color>
+    <color name="text_secondary">#7D7D7D</color>
+
+    <color name="bubble_sent">#6236FF</color>
+    <color name="bubble_sent_text">#FFFFFF</color>
+    <color name="bubble_received">#FFFFFF</color>
+    <color name="bubble_received_text">#1A1A1A</color>
+
     <color name="avatar_1">#FF8A65</color>
-    <color name="avatar_2">#1E52C4</color>
+    <color name="avatar_2">#6236FF</color>
     <color name="avatar_3">#26C281</color>
     <color name="avatar_4">#F2A93B</color>
     <color name="avatar_5">#E8527C</color>
     <color name="avatar_6">#8E6FEE</color>
-    <color name="background">#F5F7FA</color>
-    <color name="badge">#FF4D4D</color>
-    <color name="bubble_received">#F0F0F0</color>
-    <color name="bubble_received_text">#1A1A1A</color>
-    <color name="bubble_sent">#1E52C4</color>
-    <color name="bubble_sent_text">#FFFFFF</color>
-    <color name="chat_background">#FFFFFF</color>
-    <color name="clock_bar_bg">#00000000</color>
-    <color name="clock_bar_text">#757575</color>
+
+    <color name="badge">#6236FF</color>
     <color name="danger">#FF4D4D</color>
-    <color name="divider">#E0E0E0</color>
-    <color name="list_background">#FFFFFF</color>
-    <color name="nav_pill_bg">#E0E0E0</color>
-    <color name="nav_unselected">#757575</color>
-    <color name="primary">#1E52C4</color>
-    <color name="primary_dark">#114FB5</color>
-    <color name="primary_light">#EBF2FC</color>
-    <color name="splash_background">#1E52C4</color>
-    <color name="splash_subtitle">#B3FFFFFF</color>
+    <color name="divider">#E0E4F5</color>
+
+    <color name="nav_pill_bg">#FFFFFF</color>
+    <color name="nav_unselected">#7D7D7D</color>
+
+    <color name="splash_background">#6236FF</color>
     <color name="splash_title">#FFFFFF</color>
-    <color name="switch_track_on">#1E52C4</color>
-    <color name="text_primary">#1A1A1A</color>
-    <color name="text_secondary">#757575</color>
+    <color name="splash_subtitle">#CCFFFFFF</color>
 
-    <!-- Glass colors Redesign -->
-    <color name="glass_background_start">#1A0F0A</color>
-    <color name="glass_background_center">#3D2616</color>
-    <color name="glass_background_end">#120B07</color>
+    <!-- Glass UI (Adjusted for the new Indigo theme) -->
+    <color name="glass_background_start">#F4F6FF</color>
+    <color name="glass_background_center">#F4F6FF</color>
+    <color name="glass_background_end">#F4F6FF</color>
 
-    <color name="glass_panel_fill">#1AFFFFFF</color>
-    <color name="glass_panel_border">#4DFFFFFF</color>
-    <color name="glass_button_fill">#26FFFFFF</color>
+    <color name="glass_panel_fill">#FFFFFF</color>
+    <color name="glass_panel_border">#E0E4F5</color>
+    <color name="glass_button_fill">#EEECFF</color>
 
-    <color name="glass_sent_bubble">#261E52C4</color>
-    <color name="glass_received_bubble">#1AFFFFFF</color>
-
-    <color name="glass_input_fill">#1AFFFFFF</color>
-    <color name="glass_text_primary">#000000</color>
-    <color name="glass_text_secondary">#99000000</color>
-
-    <!-- Accent-derived background colors -->
-    <color name="bg_blue_light">#EBF2FC</color>
-    <color name="bg_blue_dark">#0D1524</color>
-    <color name="bg_green_light">#E8F8F2</color>
-    <color name="bg_green_dark">#0B1A14</color>
-    <color name="bg_purple_light">#F3EFFF</color>
-    <color name="bg_purple_dark">#140E26</color>
-    <color name="bg_orange_light">#FAF2E6</color>
-    <color name="bg_orange_dark">#1E1408</color>
-    <color name="bg_pink_light">#FAF0F3</color>
-    <color name="bg_pink_dark">#1F0B13</color>
-    <color name="bg_teal_light">#E6F5F4</color>
-    <color name="bg_teal_dark">#061A18</color>
-    <color name="bg_glass_light">#EBF0F6</color>
-    <color name="bg_glass_dark">#10141A</color>
+    <color name="glass_text_primary">#1A1A1A</color>
+    <color name="glass_text_secondary">#7D7D7D</color>
 </resources>

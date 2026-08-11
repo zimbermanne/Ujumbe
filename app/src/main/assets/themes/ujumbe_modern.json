@@ -1,0 +1,37 @@
+{
+  "id": "ujumbe_modern",
+  "name": "Ujumbe Modern",
+  "author": "Ujumbe Team",
+  "isPremium": false,
+  "price": "$0.00",
+  "animationType": "fade",
+  "layoutType": "floating",
+  "colors": {
+    "light": {
+      "primary": "#6236FF",
+      "primaryGradientEnd": "#8E6FFF",
+      "primaryDark": "#4A28D1",
+      "accent": "#6236FF",
+      "background": "#F4F6FF",
+      "text": "#1A1A1A",
+      "surfaceColor": "#FFFFFF",
+      "iconColor": "#6236FF",
+      "backgroundAlpha": 1.0,
+      "surfaceAlpha": 1.0
+    },
+    "dark": {
+      "primary": "#8E6FFF",
+      "primaryGradientEnd": "#B19FFF",
+      "primaryDark": "#140E26",
+      "accent": "#8E6FFF",
+      "background": "#0D0B14",
+      "text": "#F4F6FF",
+      "surfaceColor": "#1A1625",
+      "iconColor": "#B19FFF",
+      "backgroundAlpha": 1.0,
+      "surfaceAlpha": 1.0
+    }
+  },
+  "font": "sans-serif",
+  "bubbleStyle": "pill"
+}

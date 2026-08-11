@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@null">
+    android:background="@color/background">
 
     <!-- Top Header Layout -->
     <LinearLayout
@@ -15,71 +15,128 @@
         android:orientation="vertical"
         android:paddingTop="24dp">
 
-        <!-- Normal Header -->
+        <!-- User Branding Header -->
         <RelativeLayout
             android:id="@+id/headerNormal"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:paddingHorizontal="20dp">
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="8dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
-                android:text="Messages"
-                android:textColor="@color/glass_text_primary"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                android:tag="theme_text_primary" />
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hello,"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/textUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Johan"
+                    android:textColor="@color/text_primary"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:tag="theme_text_primary" />
+            </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/buttonSettings"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/tab_settings"
-                android:padding="8dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_more_vert"
-                app:tint="@color/glass_text_primary" />
-
-            <ImageButton
-                android:id="@+id/buttonSearch"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
                 android:layout_centerVertical="true"
-                android:layout_toStartOf="@id/buttonSettings"
-                android:layout_marginEnd="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/action_search"
-                android:padding="8dp"
-                android:scaleType="fitCenter"
-                android:src="@android:drawable/ic_menu_search"
-                app:tint="@color/glass_text_primary" />
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/buttonSearch"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_circle_button"
+                    android:contentDescription="@string/action_search"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@android:drawable/ic_menu_search"
+                    app:tint="@color/text_primary" />
+
+                <ImageButton
+                    android:id="@+id/buttonSettings"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_circle_button"
+                    android:contentDescription="@string/tab_settings"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_more_vert"
+                    app:tint="@color/text_primary" />
+            </LinearLayout>
 
         </RelativeLayout>
 
-        <!-- Search Bar (Pill) -->
+        <!-- Tab Selector Pill -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_glass_pill"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_pill_selected"
+                android:gravity="center"
+                android:text="All Chats"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Groups"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Contacts"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Search Bar (Animated Reveal) -->
         <LinearLayout
             android:id="@+id/layoutSearchPill"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/bg_glass_pill"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
-            android:tag="theme_pill">
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@android:drawable/ic_menu_search"
-                app:tint="@color/glass_text_secondary" />
+                app:tint="@color/text_secondary" />
 
             <EditText
                 android:id="@+id/editSearch"
@@ -87,68 +144,42 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:background="@null"
-                android:hint="Search"
+                android:hint="Search messages..."
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textColor="@color/glass_text_primary"
-                android:textColorHint="@color/glass_text_secondary"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
                 android:textSize="15sp" />
-
         </LinearLayout>
 
     </LinearLayout>
 
-    <!-- Main List in a Glass Panel -->
+    <!-- Main List on White Surface -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerConversations"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/layoutHeader"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="80dp"
-        android:background="@drawable/bg_glass_panel"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_main_surface"
         android:elevation="4dp"
-        android:outlineProvider="background"
         android:clipToPadding="false"
-        android:paddingVertical="12dp"
-        android:tag="theme_panel" />
+        android:paddingTop="12dp"
+        android:paddingBottom="100dp" />
 
-    <!-- Bottom "New Message" Pill -->
-    <LinearLayout
+    <!-- FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonAdd"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_margin="20dp"
-        android:background="@drawable/bg_glass_pill"
-        android:elevation="6dp"
-        android:outlineProvider="background"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
-        android:tag="theme_pill">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_chat_bubble_white"
-            app:tint="@color/glass_text_primary" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="New Message"
-            android:textColor="@color/glass_text_primary"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        android:layout_alignParentEnd="true"
+        android:layout_margin="24dp"
+        android:src="@drawable/ic_chat_bubble_white"
+        app:backgroundTint="@color/primary"
+        app:tint="#FFFFFF"
+        app:elevation="6dp" />
 
     <!-- Empty State -->
     <LinearLayout
@@ -160,23 +191,11 @@
         android:orientation="vertical"
         android:paddingHorizontal="48dp"
         android:visibility="gone">
-
-        <ImageView
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:alpha="0.3"
-            android:src="@android:drawable/ic_dialog_email"
-            app:tint="@color/primary" />
-
         <TextView
-            android:id="@+id/textEmpty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="@string/no_conversations"
-            android:textColor="@color/text_secondary"
-            android:textSize="15sp" />
+            android:text="No conversations"
+            android:textColor="@color/text_secondary" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -127,16 +127,23 @@ object ThemeUtils {
         val primaryColor = safeParseColor(variant.primary, Color.DKGRAY)
         val accentColor = safeParseColor(variant.accent, primaryColor)
         val textColor = safeParseColor(variant.text, Color.BLACK)
+        val surfaceColor = variant.surfaceColor?.let { safeParseColor(it, primaryColor) } ?: primaryColor
+        val iconColor = variant.iconColor?.let { safeParseColor(it, accentColor) } ?: accentColor
 
         val gradientEndColor = variant.primaryGradientEnd?.let { safeParseColor(it, primaryColor) }
 
         if (root.isNotEmpty()) {
-            // A theme's wallpaper (if set) paints behind the chat thread/list;
-            // otherwise fall back to the plain background color as before.
-            val wallpaperColor = pack.wallpaper?.let { safeParseColor(it, backgroundColor) } ?: backgroundColor
-            root.getChildAt(0).setBackgroundColor(wallpaperColor)
+            // Check for background image first
+            val backgroundImageFile = ThemePackManager.getThemeAssetPath(activity, packId, "bg_main.jpg")
+            if (backgroundImageFile.exists()) {
+                val drawable = android.graphics.drawable.Drawable.createFromPath(backgroundImageFile.absolutePath)
+                root.getChildAt(0).background = drawable
+            } else {
+                val wallpaperColor = pack.wallpaper?.let { safeParseColor(it, backgroundColor) } ?: backgroundColor
+                root.getChildAt(0).setBackgroundColor(wallpaperColor)
+            }
         }
-        skinViewHierarchy(root, primaryColor, accentColor, textColor, gradientEndColor)
+        skinViewHierarchy(root, primaryColor, accentColor, textColor, gradientEndColor, surfaceColor, iconColor)
 
         // Color the chat/inbox header bar like the reference template (a
         // filled primary-color bar with contrasting icon/text), if this
@@ -183,12 +190,22 @@ object ThemeUtils {
         val primaryColor = safeParseColor(variant.primary, Color.DKGRAY)
         val accentColor = safeParseColor(variant.accent, primaryColor)
         val textColor = safeParseColor(variant.text, Color.BLACK)
+        val surfaceColor = variant.surfaceColor?.let { safeParseColor(it, primaryColor) } ?: primaryColor
+        val iconColor = variant.iconColor?.let { safeParseColor(it, accentColor) } ?: accentColor
         val gradientEndColor = variant.primaryGradientEnd?.let { safeParseColor(it, primaryColor) }
 
-        skinViewHierarchy(itemView, primaryColor, accentColor, textColor, gradientEndColor)
+        skinViewHierarchy(itemView, primaryColor, accentColor, textColor, gradientEndColor, surfaceColor, iconColor)
     }
 
-    private fun skinViewHierarchy(view: View, primaryColor: Int, accentColor: Int, textColor: Int, gradientEndColor: Int?) {
+    private fun skinViewHierarchy(
+        view: View,
+        primaryColor: Int,
+        accentColor: Int,
+        textColor: Int,
+        gradientEndColor: Int?,
+        surfaceColor: Int,
+        iconColor: Int
+    ) {
         when (view) {
             is FloatingActionButton -> {
                 view.backgroundTintList = android.content.res.ColorStateList.valueOf(accentColor)
@@ -227,7 +244,7 @@ object ThemeUtils {
         
         // Recolor generic chrome via tags
         when (view.tag) {
-            "theme_tint" -> if (view is ImageView) view.setColorFilter(accentColor)
+            "theme_tint" -> if (view is ImageView) view.setColorFilter(iconColor)
             "theme_pill" -> {
                 val drawable = view.background
                 if (drawable is android.graphics.drawable.GradientDrawable) {
@@ -238,7 +255,7 @@ object ThemeUtils {
             "theme_panel" -> {
                 val drawable = view.background
                 if (drawable is android.graphics.drawable.GradientDrawable) {
-                    drawable.setColor(primaryColor)
+                    drawable.setColor(surfaceColor)
                     drawable.alpha = 25
                 }
             }
@@ -246,7 +263,7 @@ object ThemeUtils {
 
         if (view is ViewGroup) {
             for (i in 0 until view.childCount) {
-                skinViewHierarchy(view.getChildAt(i), primaryColor, accentColor, textColor, gradientEndColor)
+                skinViewHierarchy(view.getChildAt(i), primaryColor, accentColor, textColor, gradientEndColor, surfaceColor, iconColor)
             }
         }
     }

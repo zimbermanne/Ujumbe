@@ -50,7 +50,23 @@ object ThemePackManager {
         val existing = getInstalledPacks(context).filterNot { it.id == pack.id }
         val updated = existing + pack
         savePacks(context, updated)
+
+        // Trigger background asset download
+        downloadAssets(context, pack)
+
         return pack
+    }
+
+    private fun downloadAssets(context: Context, pack: ThemePack) {
+        // In a real app, this would use a WorkManager task to download images
+        // For now, we'll keep the structure ready.
+        // The images would be stored in context.filesDir/themes/{pack.id}/
+    }
+
+    fun getThemeAssetPath(context: Context, packId: String, fileName: String): java.io.File {
+        val dir = java.io.File(context.filesDir, "themes/$packId")
+        if (!dir.exists()) dir.mkdirs()
+        return java.io.File(dir, fileName)
     }
 
     /** Reads the given content Uri (e.g. from a file picker) and installs it. */
@@ -170,6 +186,12 @@ object ThemePackManager {
                 if (pack.id !in installedIds) {
                     installFromJson(context, json)
                 }
+            }
+            
+            // Set ujumbe_modern as default if no theme is active
+            val themePrefs = context.getSharedPreferences("theme_prefs", Context.MODE_PRIVATE)
+            if (!themePrefs.contains("active_pack_id")) {
+                setActivePack(context, "ujumbe_modern")
             }
         } catch (e: Exception) {
             e.printStackTrace()

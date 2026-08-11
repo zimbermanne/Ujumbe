@@ -4,25 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="14dp"
+    android:paddingHorizontal="24dp"
+    android:paddingVertical="12dp"
     android:gravity="center_vertical"
     android:background="?attr/selectableItemBackground">
 
     <!-- Avatar -->
     <TextView
         android:id="@+id/textAvatar"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:background="@drawable/bg_avatar_circle"
         android:gravity="center"
         android:text="U"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:tag="theme_tint" />
+        android:textStyle="bold" />
 
-    <!-- Center content (Address and Snippet) -->
+    <!-- Center content -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -35,27 +34,25 @@
             android:id="@+id/textAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/glass_text_primary"
+            android:textColor="@color/text_primary"
             android:textSize="16sp"
             android:textStyle="bold"
             android:maxLines="1"
-            android:ellipsize="end"
-            android:tag="theme_text_primary" />
+            android:ellipsize="end" />
 
         <TextView
             android:id="@+id/textSnippet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textColor="@color/glass_text_secondary"
+            android:textColor="@color/text_secondary"
             android:textSize="14sp"
             android:maxLines="1"
-            android:ellipsize="end"
-            android:tag="theme_text_secondary" />
+            android:ellipsize="end" />
 
     </LinearLayout>
 
-    <!-- Right content (Time and Unread Badge) -->
+    <!-- Right content -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,7 +63,7 @@
             android:id="@+id/textTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/glass_text_secondary"
+            android:textColor="@color/text_secondary"
             android:textSize="12sp" />
 
         <TextView
@@ -83,8 +80,7 @@
             android:textColor="#FFFFFF"
             android:textSize="11sp"
             android:textStyle="bold"
-            android:visibility="gone"
-            android:tag="theme_tint" />
+            android:visibility="gone" />
 
     </LinearLayout>
 

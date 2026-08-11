@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Neutral Base Theme -->
-    <style name="Theme.Ujumbe" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">#1E52C4</item>
-        <item name="colorPrimaryDark">#114FB5</item>
-        <item name="colorAccent">#1398FF</item>
-        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
+    <style name="Theme.Ujumbe" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.Ujumbe.NoToolbar" parent="Theme.Ujumbe">

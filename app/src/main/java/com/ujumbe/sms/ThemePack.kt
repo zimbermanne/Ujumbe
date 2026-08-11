@@ -13,7 +13,10 @@ data class ThemeVariant(
     val text: String,
     val primaryGradientEnd: String? = null,
     val backgroundAlpha: Float = 1.0f,
-    val surfaceAlpha: Float = 1.0f
+    val surfaceAlpha: Float = 1.0f,
+    val surfaceColor: String? = null,
+    val iconColor: String? = null,
+    val backgroundImageUrl: String? = null
 ) {
     fun toJson(): JSONObject = JSONObject().apply {
         put("primary", primary)
@@ -24,6 +27,9 @@ data class ThemeVariant(
         if (primaryGradientEnd != null) put("primaryGradientEnd", primaryGradientEnd)
         put("backgroundAlpha", backgroundAlpha.toDouble())
         put("surfaceAlpha", surfaceAlpha.toDouble())
+        if (surfaceColor != null) put("surfaceColor", surfaceColor)
+        if (iconColor != null) put("iconColor", iconColor)
+        if (backgroundImageUrl != null) put("backgroundImageUrl", backgroundImageUrl)
     }
 
     companion object {
@@ -36,7 +42,10 @@ data class ThemeVariant(
                 text = json.getString("text"),
                 primaryGradientEnd = json.optString("primaryGradientEnd", "").trim().ifEmpty { null },
                 backgroundAlpha = json.optDouble("backgroundAlpha", 1.0).toFloat(),
-                surfaceAlpha = json.optDouble("surfaceAlpha", 1.0).toFloat()
+                surfaceAlpha = json.optDouble("surfaceAlpha", 1.0).toFloat(),
+                surfaceColor = json.optString("surfaceColor", "").trim().ifEmpty { null },
+                iconColor = json.optString("iconColor", "").trim().ifEmpty { null },
+                backgroundImageUrl = json.optString("backgroundImageUrl", "").trim().ifEmpty { null }
             )
         }
     }
@@ -60,7 +69,8 @@ data class ThemePack(
     val animationType: String = "standard",
     val layoutType: String = "default",
     val isPremium: Boolean = false,
-    val price: String = "$0.00"
+    val price: String = "$0.00",
+    val customDrawables: Map<String, String> = emptyMap() // key: name, value: url
 ) {
     fun variantFor(mode: String): ThemeVariant = if (mode == "dark") dark else light
 
@@ -79,6 +89,11 @@ data class ThemePack(
         put("layoutType", layoutType)
         put("isPremium", isPremium)
         put("price", price)
+        if (customDrawables.isNotEmpty()) {
+            val drawablesJson = JSONObject()
+            customDrawables.forEach { (k, v) -> drawablesJson.put(k, v) }
+            put("customDrawables", drawablesJson)
+        }
     }
 
     companion object {
@@ -87,26 +102,6 @@ data class ThemePack(
         val VALID_ANIMATIONS = setOf("standard", "fade", "slide", "bounce")
         val VALID_LAYOUTS = setOf("default", "compact", "loose", "floating")
 
-        /**
-         * Parses a theme pack from raw JSON text.
-         * Expected shape:
-         * {
-         *   "id": "sunset",
-         *   "name": "Sunset Glow",
-         *   "author": "Someone",
-         *   "colors": {
-         *     "light": { "primary": "#FF6B35", "primaryDark": "#C44D1F", "accent": "#FFB088", "background": "#FFF3ED", "text": "#2B1206" },
-         *     "dark":  { "primary": "#FF6B35", "primaryDark": "#1A0D06", "accent": "#FFB088", "background": "#1A0D06", "text": "#FFE8DC" }
-         *   },
-         *   "font": "serif",            // optional: sans-serif | serif | monospace | cursive | casual
-         *   "bubbleStyle": "pill",       // optional: rounded | sharp | pill
-         *   "wallpaper": "#0E1116",      // optional: hex color painted behind the chat thread
-         *   "animationType": "slide",   // optional: standard | fade | slide | bounce
-         *   "layoutType": "compact",    // optional: default | compact | loose | floating
-         *   "isPremium": true,          // optional: false by default
-         *   "price": "$1.99"            // optional: "$0.00" by default
-         * }
-         */
         fun fromJsonString(raw: String): ThemePack {
             val json = JSONObject(raw)
 
@@ -138,17 +133,6 @@ data class ThemePack(
                 throw IllegalArgumentException("colors.dark is missing a required color field")
             }
 
-            for (hex in listOfNotNull(
-                light.primary, light.primaryDark, light.accent, light.background, light.text, light.primaryGradientEnd,
-                dark.primary, dark.primaryDark, dark.accent, dark.background, dark.text, dark.primaryGradientEnd
-            )) {
-                try {
-                    android.graphics.Color.parseColor(hex)
-                } catch (e: Exception) {
-                    throw IllegalArgumentException("\"$hex\" is not a valid color (use #RRGGBB or #AARRGGBB)")
-                }
-            }
-
             val font = json.optString("font", "sans-serif").trim().ifEmpty { "sans-serif" }
             require(font in VALID_FONTS) {
                 "\"font\" must be one of: ${VALID_FONTS.joinToString(", ")}"
@@ -171,13 +155,14 @@ data class ThemePack(
 
             val isPremium = json.optBoolean("isPremium", false)
             val price = json.optString("price", "$0.00")
-
             val wallpaper = json.optString("wallpaper", "").trim().ifEmpty { null }
-            if (wallpaper != null) {
-                try {
-                    android.graphics.Color.parseColor(wallpaper)
-                } catch (e: Exception) {
-                    throw IllegalArgumentException("\"wallpaper\" is not a valid color (use #RRGGBB or #AARRGGBB)")
+
+            val customDrawables = mutableMapOf<String, String>()
+            json.optJSONObject("customDrawables")?.let { drawablesJson ->
+                val keys = drawablesJson.keys()
+                while (keys.hasNext()) {
+                    val key = keys.next()
+                    customDrawables[key] = drawablesJson.getString(key)
                 }
             }
 
@@ -185,7 +170,8 @@ data class ThemePack(
                 id = id, name = name, author = author, light = light, dark = dark,
                 font = font, bubbleStyle = bubbleStyle, wallpaper = wallpaper,
                 animationType = animationType, layoutType = layoutType,
-                isPremium = isPremium, price = price
+                isPremium = isPremium, price = price,
+                customDrawables = customDrawables
             )
         }
     }
